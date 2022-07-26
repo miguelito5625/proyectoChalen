@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-init.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+</head>
+
+<body>
+    <h1>Subir Escaneos</h1>
+
+    <br>
+    <input type="file" name="archivo" id="idInputFile" accept="application/pdf">
+    <br>
+    <input type="button" value="Enviar" onclick="enviarArchivo()">
+
+    <script>
+        
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXwPn2E2rUXh1oT2AeJpVTAV7pMw1NNcY",
+            authDomain: "wifinet-df089.firebaseapp.com",
+            databaseURL: "https://wifinet-df089.firebaseio.com",
+            projectId: "wifinet-df089",
+            storageBucket: "wifinet-df089.appspot.com",
+            messagingSenderId: "964535514142",
+            appId: "1:964535514142:web:5a3c567bcfe000cfadaa0f"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        // Initialize Cloud Storage and get a reference to the service
+        const storage = app.storage();
+
+
+        function enviarArchivo() {
+            console.log("Se presiono el boton");
+            var inputArchivo = document.getElementById("idInputFile");
+            var archivo = inputArchivo.files[0];
+            var storageRef = storage.ref('escaneos/' + archivo.name);
+            var task = storageRef.put(archivo);
+            task.on('state_changed', function progress(snapshot) {
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                // uploader.value = percentage;
+                console.log(percentage);
+
+            }, function error(err) {
+
+
+            }, function complete(data) {
+                console.log("ARCHIVO SUBIDO");
+                console.log(data);
+            });
+            storageRef.getDownloadURL().then((url) => {console.log(url);});
+        }
+
+
+    </script>
+
+</body>
+
+</html>
