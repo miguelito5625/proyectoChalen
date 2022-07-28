@@ -55,7 +55,6 @@
 
             }, function complete(data) {
                 console.log("ARCHIVO SUBIDO");
-                console.log(data);
             });
             storageRef.getDownloadURL().then((url) => {console.log(url);});
         }
