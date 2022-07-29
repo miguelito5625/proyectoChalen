@@ -41,14 +41,14 @@
 
         function enviarArchivo() {
             console.log("Se presiono el boton");
-            var inputArchivo = document.getElementById("idInputFile");
-            var archivo = inputArchivo.files[0];
+            const inputArchivo = document.getElementById("idInputFile");
+            const archivo = inputArchivo.files[0];
 
             const nombreArchivo = archivo.name.split('.')[0] + '-' + Number(new Date().getTime()/1000).toFixed(0).toString() + '.' + archivo.name.split('.')[1];
 
 
-            var storageRef = storage.ref('escaneos/' + nombreArchivo);
-            var task = storageRef.put(archivo);
+            const storageRef = storage.ref('escaneos/' + nombreArchivo);
+            const task = storageRef.put(archivo);
             task.on('state_changed', function progress(snapshot) {
                 var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 // uploader.value = percentage;
