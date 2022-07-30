@@ -117,9 +117,33 @@
 
         async function writeUserData(userId, activo) {
 
+            // const user = app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq');
+            // user.get().then((doc) => {
+            //     if (doc.exists) {
+            //         console.log("Document data:", doc.data());
+            //     } else {
+            //         // doc.data() will be undefined in this case
+            //         console.log("No such document!");
+            //     }
+            // }).catch((error) => {
+            //     console.log("Error getting document:", error);
+            // });
 
-            app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq').get()
-                .then(snapshot => {console.log(snapshot.data());})
+
+            // app.firestore().collection("usuarios").where("activo", "==", true)
+            //     .get()
+            //     .then((querySnapshot) => {
+            //         querySnapshot.forEach((doc) => {
+            //             // doc.data() is never undefined for query doc snapshots
+            //             console.log(doc.id, " => ", doc.data());
+            //         });
+            //     })
+            //     .catch((error) => {
+            //         console.log("Error getting documents: ", error);
+            //     });
+
+            // app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq').get()
+            //     .then(snapshot => {console.log(snapshot.id, '=>', snapshot.data());})
 
             // const snapshot = await app.firestore().collection('usuarios').get()
             // var usuarios = snapshot.docs.map(doc => doc.data());
