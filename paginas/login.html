@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,35 +10,111 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
-     <link rel="stylesheet" href="login.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <link rel="stylesheet" href="login.css">
 
 </head>
+
 <body>
 
     <div class="wrapper">
         <div class="logo">
-            <img src="https://w7.pngwing.com/pngs/770/246/png-transparent-judge-lawyer-gavel-training-course-hand-logo-law-firm.png" alt="">
+            <img src="https://w7.pngwing.com/pngs/770/246/png-transparent-judge-lawyer-gavel-training-course-hand-logo-law-firm.png"
+                alt="">
         </div>
         <div class="text-center mt-4 name">
             Iniciar Sesion
         </div>
-        <form class="p-3 mt-3">
+        <form class="p-3 mt-3" onsubmit="event.preventDefault(); iniciarSesion();">
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="userName" id="userName" placeholder="Usuario">
+                <input type="text" name="inputUsuario" id="inputUsuario" placeholder="Usuario">
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="Contraseña">
+                <input type="password" name="inputContrasenia" id="inputContrasenia" placeholder="Contraseña">
             </div>
-            <button class="btn mt-3">Login</button>
+            <button class="btn mt-3">Acceder</button>
         </form>
         <!-- <div class="text-center fs-6">
             <a href="#">Forget password?</a> or <a href="#">Sign up</a>
         </div> -->
     </div>
-    
+
+    <script>
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXwPn2E2rUXh1oT2AeJpVTAV7pMw1NNcY",
+            authDomain: "wifinet-df089.firebaseapp.com",
+            databaseURL: "https://wifinet-df089.firebaseio.com",
+            projectId: "wifinet-df089",
+            storageBucket: "wifinet-df089.appspot.com",
+            messagingSenderId: "964535514142",
+            appId: "1:964535514142:web:5a3c567bcfe000cfadaa0f"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+
+        //    const uid = window.localStorage.getItem('uid');
+        //    console.log(uid);
+
+
+        const usuario = document.getElementById("inputUsuario");
+        const contrasenia = document.getElementById("inputContrasenia");
+
+        function iniciarSesion() {
+            console.log(usuario.value);
+            console.log(contrasenia.value);
+
+            // app.auth().signOut().then(() => {
+            //     // Sign-out successful.
+            //     console.log('se cerro sesion');
+            // }).catch((error) => {
+            //     // An error happened.
+            //     console.log(error);
+            // });
+
+            // app.auth().signInWithEmailAndPassword(usuario.value, contrasenia.value)
+            //     .then((userCredential) => {
+            //         // Signed in
+            //         var user = userCredential.user;
+            //         console.log(user);
+            //         console.log(user.uid);
+            //         window.localStorage.setItem('uid', user.uid);
+            //         // ...
+            //     })
+            //     .catch((error) => {
+            //         var errorCode = error.code;
+            //         var errorMessage = error.message;
+            //         console.log(errorMessage);
+            //     });
+
+
+
+            // app.auth().createUserWithEmailAndPassword(usuario.value, contrasenia.value)
+            //     .then((userCredential) => {
+            //         // Signed in
+            //         var user = userCredential.user;
+            //         console.log(user);
+            //         // ...
+            //     })
+            //     .catch((error) => {
+            //         var errorCode = error.code;
+            //         var errorMessage = error.message;
+            //         console.log(errorMessage);
+            //         // ..
+            //     });
+
+        }
+
+    </script>
+
 </body>
+
 </html>
