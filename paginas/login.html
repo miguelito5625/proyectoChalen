@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+
     <link rel="stylesheet" href="login.css">
 
 </head>
@@ -70,9 +71,32 @@
         const contrasenia = document.getElementById("inputContrasenia");
 
         function iniciarSesion() {
-            console.log(usuario.value);
-            console.log(contrasenia.value);
-            writeUserData('cmQ2HpAWgUm7a8ZGdOQq', false);
+            // console.log(usuario.value);
+            // console.log(contrasenia.value);
+            // writeUserData('cmQ2HpAWgUm7a8ZGdOQq', false);
+
+            // $.ajax({
+            //     type: "POST",
+            //     url: '../php/validatehash.php',
+            //     data: {
+            //         pass: contrasenia.value,
+            //     },
+            //     success: function (response) {
+            //         console.log(response);
+            //     }
+            // });
+
+            // $.ajax({
+            //     type: "POST",
+            //     url: '../php/hashpassword.php',
+            //     data: {
+            //         pass: contrasenia.value,
+            //     },
+            //     success: function (response) {
+            //         console.log(response);
+            //     }
+            // });
+
 
             // app.auth().signOut().then(() => {
             //     // Sign-out successful.
