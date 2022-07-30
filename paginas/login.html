@@ -14,6 +14,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <link rel="stylesheet" href="login.css">
 
@@ -71,6 +72,7 @@
         function iniciarSesion() {
             console.log(usuario.value);
             console.log(contrasenia.value);
+            writeUserData('cmQ2HpAWgUm7a8ZGdOQq', false);
 
             // app.auth().signOut().then(() => {
             //     // Sign-out successful.
@@ -110,6 +112,37 @@
             //         console.log(errorMessage);
             //         // ..
             //     });
+
+        }
+
+        async function writeUserData(userId, activo) {
+
+
+            app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq').get()
+                .then(snapshot => {console.log(snapshot.data());})
+
+            // const snapshot = await app.firestore().collection('usuarios').get()
+            // var usuarios = snapshot.docs.map(doc => doc.data());
+            // console.log(usuarios);
+
+            // var usuario = await app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq').get();
+            // console.log(usuario);
+
+            // const liam = await
+            //     app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq').set({
+            //         // usuario: 'mike',
+            //         // contrasenia: '12345',
+            //         activo: true
+            //     }, { merge: true });
+
+            // const liam = await
+            //     app.firestore().collection('usuarios').doc('cmQ2HpAWgUm7a8ZGdOQq').update({
+            //         // usuario: 'mike',
+            //         // contrasenia: '12345',
+            //         activo: true
+            //     });
+
+            // console.log(liam);
 
         }
 
