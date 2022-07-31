@@ -16,6 +16,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <link rel="stylesheet" href="login.css">
 
@@ -76,6 +78,15 @@
             const contrasenia = document.getElementById("inputContrasenia").value;
             console.log(usuario, contrasenia);
 
+            Swal.fire({
+                title: 'Iniciando sesion',
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+
             const userFireStore = app.firestore().collection('usuarios').doc(usuario);
             userFireStore.get().then((doc) => {
                 if (doc.exists) {
@@ -92,10 +103,41 @@
                         success: function (response) {
                             console.log(response);
                             if (response === 'valid') {
-                                console.log('success');
+                                console.log('sesion iniciada');
+
+                                setTimeout(() => {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Sesión iniciada',
+                                        showConfirmButton: false
+                                    });
+
+                                    setTimeout(() => {
+                                        window.location.href = "/proyectoChalen/paginas/ajaxtabla.html";
+                                    }, 2000);
+                                    
+                                }, 1200);
+
                             } else {
-                                console.log('error');
+                                console.log('error al iniciar sesion');
+                                setTimeout(() => {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'revise sus credenciales',
+                                        showConfirmButton: false,
+                                        showCloseButton: true,
+                                    });
+                                }, 1200);
                             }
+                        },
+                        error: function (xhr, status) {
+                            setTimeout(() => {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'No se pudo iniciar sesión',
+                                        showConfirmButton: false
+                                    });
+                                }, 1200);
                         }
                     });
 
