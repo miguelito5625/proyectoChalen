@@ -34,11 +34,12 @@
         <form class="p-3 mt-3" onsubmit="event.preventDefault(); iniciarSesion();">
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="inputUsuario" id="inputUsuario" placeholder="Usuario">
+                <input type="text" name="inputUsuario" id="inputUsuario" placeholder="Usuario" value="mike">
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="inputContrasenia" id="inputContrasenia" placeholder="Contraseña">
+                <input type="password" name="inputContrasenia" id="inputContrasenia" placeholder="Contraseña"
+                    value="contrasenia">
             </div>
             <button class="btn mt-3">Acceder</button>
         </form>
@@ -67,10 +68,48 @@
         //    console.log(uid);
 
 
-        const usuario = document.getElementById("inputUsuario");
-        const contrasenia = document.getElementById("inputContrasenia");
+        // const usuario = document.getElementById("inputUsuario");
+        // const contrasenia = document.getElementById("inputContrasenia");
 
         function iniciarSesion() {
+            const usuario = document.getElementById("inputUsuario").value;
+            const contrasenia = document.getElementById("inputContrasenia").value;
+            console.log(usuario, contrasenia);
+
+            const userFireStore = app.firestore().collection('usuarios').doc(usuario);
+            userFireStore.get().then((doc) => {
+                if (doc.exists) {
+                    console.log('exists');
+                    console.log(doc.data());
+
+                    $.ajax({
+                        type: "POST",
+                        url: '../php/validatehash.php',
+                        data: {
+                            pass: contrasenia,
+                            hash: doc.data().contrasenia
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if (response === 'valid') {
+                                console.log('success');
+                            } else {
+                                console.log('error');
+                            }
+                        }
+                    });
+
+
+                } else {
+                    console.log('not exists');
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+
+        }
+
+        function pruebaTest() {
             // console.log(usuario.value);
             // console.log(contrasenia.value);
             // writeUserData('cmQ2HpAWgUm7a8ZGdOQq', false);
