@@ -129,11 +129,11 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Documento Escaneado</label>
-                  <input class="form-control" type="file" id="formFile" onchange="fileSelected(this)">
+                  <input class="form-control" type="file" id="formFile" onchange="fileSelected(this)" accept="application/pdf">
                 </div>
               </div>
 
-              <embed src="http://example.com/the.pdf" id="idembed" width="500" height="375" type="application/pdf">
+              <embed src="" id="idembed" width="500" height="375" type="application/pdf">
 
 
             </div>
