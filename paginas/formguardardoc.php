@@ -37,29 +37,54 @@
 
               <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
+                  <label for="idInputTipoDoc" class="form-label">Tipo de documento</label>
+                  <select class="form-select" id="idInputTipoDoc" aria-label="Default select example">
+                    <!-- <option selected></option> -->
+                    <option value="1">Documento tipo 1</option>
+                    <option value="1">Documento tipo 2</option>
+                  </select>
                 </div>
               </div>
 
               <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
+                  <label for="idInputNombreVendedor" class="form-label">Nombre vendedor</label>
+                  <input type="text" class="form-control" id="idInputNombreVendedor" placeholder="">
                 </div>
               </div>
 
               <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
+                  <label for="idInputNombreComprador" class="form-label">Nombre comprador</label>
+                  <input type="text" class="form-control" id="idInputNombreComprador" placeholder="">
                 </div>
               </div>
 
               <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
+                  <label for="idInputDpiVendedor" class="form-label">No. DPI vendedor</label>
+                  <input type="text" class="form-control" id="idInputDpiVendedor" placeholder="">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="mb-3">
+                  <label for="idInputDpiComprador" class="form-label">No. DPI comprador</label>
+                  <input type="text" class="form-control" id="idInputDpiComprador" placeholder="">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="mb-3">
+                  <label for="idInputFecha" class="form-label">Fecha</label>
+                  <input type="date" class="form-control" id="idInputFecha" placeholder="">
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="mb-3">
+                  <label for="idInputNumEscritura" class="form-label">No. De Escritura</label>
+                  <input type="text" class="form-control" id="idInputNumEscritura" placeholder="">
                 </div>
               </div>
 
@@ -70,51 +95,6 @@
         </div>
       </div>
 
-      <div class="col-12">
-        <div class="card mt-2">
-          <div class="card-header text-center">
-            Datos Persona
-          </div>
-          <div class="card-body">
-
-            <div class="row">
-
-              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <div class="mb-3">
-                  <label for="idInputNombreDoc" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="idInputNombreDoc" placeholder="">
-                </div>
-              </div>
-
-            </div>
-
-
-          </div>
-        </div>
-
-
-      </div>
 
 
       <div class="col-12">
@@ -124,7 +104,7 @@
           </div>
           <div class="card-body">
 
-            <div class="row">
+            <div class="row d-flex justify-content-center">
 
               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="mb-3">
@@ -133,8 +113,12 @@
                 </div>
               </div>
 
-              <embed src="" id="idembed" width="500" height="375" type="application/pdf">
+              <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
 
+                <embed src="" id="idembed" width="100%" height="500" type="application/pdf">
+
+
+              </div>
 
             </div>
 

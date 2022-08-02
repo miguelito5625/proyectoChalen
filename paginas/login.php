@@ -80,7 +80,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: '/proyectoChalen/php/validatehash.php',
+                        url: 'funcionesphp/validatehash.php',
                         data: {
                             pass: contrasenia,
                             hash: doc.data().contrasenia
