@@ -176,6 +176,26 @@
         urlArchivo: ""
       }
 
+      // $.ajax({
+      //   type: "POST",
+      //   url: 'funcionesphp/guardardocumento.php',
+      //   data: documento,
+      //   type: "GET",
+      //   dataType: "json",
+      //   success: function(response) {
+      //     console.log(response);
+      //     if (response.estado === 'ok') {
+      //       console.log("TODO ok");
+      //     }else{
+      //       console.log("NADA OK");
+      //     }
+
+      //   },
+      //   error: function(xhr, status) {
+      //     console.log(xhr, status);
+      //     console.log('HUBO UN ERROR');
+      //   }
+      // });
       const inputArchivo = document.getElementById("idInputFile");
       const archivo = inputArchivo.files[0];
 
@@ -204,10 +224,11 @@
             data: documento,
             success: function(response) {
               console.log(response);
-             
+
             },
             error: function(xhr, status) {
               console.log('HUBO UN ERROR');
+              console.log(xhr, status);
             }
           });
 
