@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Principal</title>
+  <title>Guardar</title>
 
   <link rel="stylesheet" href="css/formguardardoc.css">
 
@@ -14,6 +14,7 @@
 
   <?php
   include 'headers/headerbootstrap.php';
+  include 'headers/headerfirebase.php';
   include 'headers/headernav.php';
   ?>
 
@@ -40,8 +41,8 @@
                   <label for="idInputTipoDoc" class="form-label">Tipo de documento</label>
                   <select class="form-select" id="idInputTipoDoc" aria-label="Default select example">
                     <!-- <option selected></option> -->
-                    <option value="1">Documento tipo 1</option>
-                    <option value="1">Documento tipo 2</option>
+                    <option value="Documento tipo 1">Documento tipo 1</option>
+                    <option value="Documento tipo 2">Documento tipo 2</option>
                   </select>
                 </div>
               </div>
@@ -108,8 +109,8 @@
 
               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="mb-3">
-                  <label for="formFile" class="form-label">Documento Escaneado</label>
-                  <input class="form-control" type="file" id="formFile" onchange="fileSelected(this)" accept="application/pdf">
+                  <label for="idInputFile" class="form-label">Documento Escaneado</label>
+                  <input class="form-control" type="file" id="idInputFile" onchange="fileSelected(this)" accept="application/pdf">
                 </div>
               </div>
 
@@ -133,16 +134,87 @@
 
   </div>
 
-  <a href="#" class="float">
+  <a href="#" class="float" onclick="guardarDocumento()">
     <i class="fa fa-save fa-lg my-float"></i>
   </a>
 
 
   <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCXwPn2E2rUXh1oT2AeJpVTAV7pMw1NNcY",
+      authDomain: "wifinet-df089.firebaseapp.com",
+      databaseURL: "https://wifinet-df089.firebaseio.com",
+      projectId: "wifinet-df089",
+      storageBucket: "wifinet-df089.appspot.com",
+      messagingSenderId: "964535514142",
+      appId: "1:964535514142:web:5a3c567bcfe000cfadaa0f"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    // Initialize Cloud Storage and get a reference to the service
+    const storage = app.storage();
+
+
     function fileSelected(event) {
       console.log(event.files[0].name);
       const url = window.URL.createObjectURL(event.files[0]);
       document.getElementById('idembed').src = url;
+    }
+
+
+    function guardarDocumento() {
+      var documento = {
+        tipoDocumento: document.getElementById('idInputTipoDoc').value,
+        nombreVendedor: document.getElementById('idInputNombreVendedor').value,
+        nombreComprador: document.getElementById('idInputNombreComprador').value,
+        dpiVendedor: document.getElementById('idInputDpiVendedor').value,
+        dpiComprador: document.getElementById('idInputDpiComprador').value,
+        fecha: document.getElementById('idInputFecha').value,
+        numEscritura: document.getElementById('idInputNumEscritura').value,
+        urlArchivo: ""
+      }
+
+      const inputArchivo = document.getElementById("idInputFile");
+      const archivo = inputArchivo.files[0];
+
+      const nombreArchivo = archivo.name.split('.')[0] + '-' + Number(new Date().getTime() / 1000).toFixed(0).toString() + '.' + archivo.name.split('.')[1];
+
+
+      const storageRef = storage.ref('escaneos/' + nombreArchivo);
+      const task = storageRef.put(archivo);
+      task.on('state_changed', function progress(snapshot) {
+        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // uploader.value = percentage;
+        console.log(percentage);
+
+      }, function error(err) {
+
+
+      }, function complete(data) {
+        console.log("ARCHIVO SUBIDO");
+        storageRef.getDownloadURL().then((url) => {
+          documento.urlArchivo = url;
+          console.log(documento);
+
+          $.ajax({
+            type: "POST",
+            url: 'funcionesphp/guardardocumento.php',
+            data: documento,
+            success: function(response) {
+              console.log(response);
+             
+            },
+            error: function(xhr, status) {
+              console.log('HUBO UN ERROR');
+            }
+          });
+
+
+        });
+      });
+
     }
   </script>
 

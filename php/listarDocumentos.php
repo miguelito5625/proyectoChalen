@@ -31,19 +31,19 @@
    }
 
    // Total number of records without filtering
-   $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM documentos ");
+   $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM documentostest ");
    $stmt->execute();
    $records = $stmt->fetch();
    $totalRecords = $records['allcount'];
 
    // Total number of records with filtering
-   $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM documentos WHERE 1 ".$searchQuery);
+   $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM documentostest WHERE 1 ".$searchQuery);
    $stmt->execute($searchArray);
    $records = $stmt->fetch();
    $totalRecordwithFilter = $records['allcount'];
 
    // Fetch records
-   $stmt = $conn->prepare("SELECT * FROM documentos WHERE 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT :limit,:offset");
+   $stmt = $conn->prepare("SELECT * FROM documentostest WHERE 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT :limit,:offset");
 
    // Bind values
    foreach ($searchArray as $key=>$search) {
