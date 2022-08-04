@@ -18,6 +18,8 @@
   include 'headers/headernav.php';
   ?>
 
+  <script src="js/pdfjs/webviewer.min.js"></script>
+
 
 </head>
 
@@ -110,13 +112,17 @@
               <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="mb-3">
                   <label for="idInputFile" class="form-label">Documento Escaneado</label>
-                  <input class="form-control" type="file" id="idInputFile" onchange="fileSelected(this)" accept="application/pdf">
+                  <!-- <input class="form-control" type="file" id="idInputFile" onchange="fileSelected(this)" accept="application/pdf"> -->
+                  <input class="form-control" type="file" id="idInputFile" accept="application/pdf">
                 </div>
               </div>
 
               <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
 
-                <embed src="" id="idembed" width="100%" height="500" type="application/pdf">
+                <!-- <embed src="" id="idembed" width="100%" height="500" type="application/pdf"> -->
+
+                <div id='viewer' style="width:100%; height: 500px; margin:0 auto"></div>
+
 
 
               </div>
@@ -156,6 +162,34 @@
     // Initialize Cloud Storage and get a reference to the service
     const storage = app.storage();
 
+    const inputArchivo = document.getElementById("idInputFile");
+    WebViewer({
+    path: 'js/pdfjs', // path to the PDF.js Express'lib' folder on your server
+    licenseKey: 'xaRA048B0xv8p9GDh6ua',
+    // initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/webviewer-demo.pdf',
+    // initialDoc: '/path/to/my/file.pdf',  // You can also use documents on your server
+  }, document.getElementById('viewer'))
+  .then(instance => {
+    // now you can access APIs through the WebViewer instance
+    const { Core, UI } = instance;
+
+    inputArchivo.addEventListener('change', () => {
+        // Get the file from the input
+        const file = inputArchivo.files[0];
+        instance.UI.loadDocument(file, { filename: file.name });
+      });
+
+    // adding an event listener for when a document is loaded
+    Core.documentViewer.addEventListener('documentLoaded', () => {
+      console.log('document loaded');
+    });
+
+    // adding an event listener for when the page number has changed
+    Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
+      console.log(`Page number is: ${pageNumber}`);
+    });
+  });
+
 
     function fileSelected(event) {
       console.log(event.files[0].name);
@@ -186,7 +220,7 @@
         urlArchivo: ""
       }
 
-      const inputArchivo = document.getElementById("idInputFile");
+      // const inputArchivo = document.getElementById("idInputFile");
       const archivo = inputArchivo.files[0];
 
       const nombreArchivo = archivo.name.split('.')[0] + '-' + Number(new Date().getTime() / 1000).toFixed(0).toString() + '.' + archivo.name.split('.')[1];
