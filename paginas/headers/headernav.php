@@ -10,7 +10,7 @@
             <a class="nav-link" aria-current="page" href="formguardardoc.php">Escanear</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Documentos</a>
+            <a class="nav-link" href="tabladocumentos.php">Documentos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Usuarios</a>
